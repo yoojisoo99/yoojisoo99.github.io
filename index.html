@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>유지수 포트폴리오</title>
+<meta name="description" content="DevOps/인프라 엔지니어 유지수의 프로젝트, 기술 스택, 수상 이력을 정리한 포트폴리오">
+</head>
+<body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F2F5F5;
+    --surface:#FFFFFF;
+    --surface-2:#E7ECEC;
+    --ink:#101A1A;
+    --ink-dim:#4C5D5C;
+    --ink-faint:#7C8B8A;
+    --border:#D6DEDD;
+    --accent:#146664;
+    --accent-strong:#0C4A48;
+    --accent-soft:#DBEEEC;
+    --amber:#B75E0B;
+    --amber-soft:#F7E7D4;
+    --danger:#A6402F;
+    --danger-soft:#F5E1DC;
+    --code-bg:#0F1B1A;
+    --code-ink:#CFE9E5;
+    --shadow: 0 1px 2px rgba(16,26,26,0.04), 0 8px 24px rgba(16,26,26,0.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0E0E;
+      --surface:#111817;
+      --surface-2:#182120;
+      --ink:#E7EFEE;
+      --ink-dim:#A6B6B4;
+      --ink-faint:#748482;
+      --border:#243231;
+      --accent:#5BD1C8;
+      --accent-strong:#8FE6DC;
+      --accent-soft:#132927;
+      --amber:#E8A559;
+      --amber-soft:#2B2013;
+      --danger:#E08672;
+      --danger-soft:#2C1A16;
+      --code-bg:#060B0B;
+      --code-ink:#B9E2DB;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 28px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0E0E;
+    --surface:#111817;
+    --surface-2:#182120;
+    --ink:#E7EFEE;
+    --ink-dim:#A6B6B4;
+    --ink-faint:#748482;
+    --border:#243231;
+    --accent:#5BD1C8;
+    --accent-strong:#8FE6DC;
+    --accent-soft:#132927;
+    --amber:#E8A559;
+    --amber-soft:#2B2013;
+    --danger:#E08672;
+    --danger-soft:#2C1A16;
+    --code-bg:#060B0B;
+    --code-ink:#B9E2DB;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 28px rgba(0,0,0,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', -apple-system, 'Malgun Gothic', sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace; }
+  h1,h2,h3,h4{ text-wrap:balance; margin:0; font-weight:600; letter-spacing:-0.01em; }
+  p{ margin:0; }
+  a{ color:var(--accent-strong); }
+  ::selection{ background:var(--accent-soft); }
+
+  .wrap{ max-width:960px; margin:0 auto; padding:0 clamp(20px,6vw,56px); }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:960px; margin:0 auto; padding:0 clamp(20px,6vw,56px);
+    display:flex; align-items:center; justify-content:space-between;
+    height:56px; gap:16px;
+  }
+  .nav-brand{ font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:14px; color:var(--ink); white-space:nowrap; }
+  .nav-brand span{ color:var(--accent); }
+  .nav-links{ display:flex; gap:2px; list-style:none; margin:0; padding:0; overflow-x:auto; scrollbar-width:none; }
+  .nav-links::-webkit-scrollbar{ display:none; }
+  .nav-links a{
+    display:block; padding:8px 12px; font-size:13px; color:var(--ink-dim); text-decoration:none;
+    white-space:nowrap; border-radius:6px; font-weight:500;
+  }
+  .nav-links a:hover{ color:var(--ink); background:var(--surface-2); }
+  .nav-links a.active{ color:var(--accent-strong); background:var(--accent-soft); }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding-top:64px; padding-bottom:40px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:500;
+    color:var(--accent-strong); letter-spacing:.08em; text-transform:uppercase;
+    display:inline-flex; align-items:center; gap:8px; margin-bottom:18px;
+  }
+  .eyebrow::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--accent); display:inline-block; }
+  .hero h1{ font-size:clamp(36px,6vw,54px); line-height:1.05; }
+  .hero-role{ margin-top:10px; font-size:17px; color:var(--ink-dim); font-weight:500; }
+  .hero-desc{ margin-top:18px; max-width:62ch; font-size:16px; color:var(--ink-dim); }
+  .hero-desc strong{ color:var(--ink); font-weight:600; }
+
+  .contact-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
+  .pill{
+    display:inline-flex; align-items:center; gap:7px;
+    padding:8px 14px; border-radius:999px; border:1px solid var(--border);
+    background:var(--surface); font-size:13.5px; color:var(--ink); text-decoration:none;
+    font-family:'IBM Plex Mono',monospace; font-weight:500;
+    transition:border-color .15s, transform .15s;
+  }
+  .pill:hover{ border-color:var(--accent); transform:translateY(-1px); }
+  .pill svg{ width:14px; height:14px; stroke:var(--accent-strong); flex-shrink:0; }
+
+  .stats{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    margin-top:44px; background:var(--border); border:1px solid var(--border); border-radius:12px;
+    overflow:hidden;
+  }
+  .stat{ background:var(--surface); padding:18px 16px; }
+  .stat b{
+    display:block; font-family:'IBM Plex Mono',monospace; font-size:26px; color:var(--accent-strong);
+    font-variant-numeric:tabular-nums; font-weight:600;
+  }
+  .stat span{ display:block; margin-top:4px; font-size:12.5px; color:var(--ink-faint); }
+
+  /* ---------- Section shell ---------- */
+  section{ padding:56px 0; border-top:1px solid var(--border); }
+  .sec-head{ margin-bottom:32px; }
+  .sec-num{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-faint); letter-spacing:.06em; }
+  .sec-title{ font-size:26px; margin-top:6px; }
+  .sec-sub{ margin-top:8px; color:var(--ink-dim); font-size:14.5px; max-width:64ch; }
+
+  /* ---------- Skills ---------- */
+  .skill-groups{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:20px; }
+  .skill-card{ background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px 18px 16px; }
+  .skill-card h4{ font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint); font-weight:600; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:7px; margin-top:12px; }
+  .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; padding:5px 10px; border-radius:6px;
+    background:var(--accent-soft); color:var(--accent-strong); font-weight:500;
+  }
+  .tag.amber{ background:var(--amber-soft); color:var(--amber); }
+
+  /* ---------- Projects ---------- */
+  .project{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:28px 28px 30px; margin-bottom:24px; box-shadow:var(--shadow);
+  }
+  .project-top{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; align-items:flex-start; }
+  .project-title{ font-size:20px; }
+  .project-meta{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-faint); margin-top:6px;
+    display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .badge{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; padding:5px 11px;
+    border-radius:999px; white-space:nowrap; border:1px solid transparent;
+  }
+  .badge.gold{ background:var(--amber-soft); color:var(--amber); border-color:color-mix(in srgb, var(--amber) 35%, transparent); }
+  .badge.role{ background:var(--accent-soft); color:var(--accent-strong); }
+
+  .project-grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px 30px; margin-top:22px; }
+  @media (max-width:640px){ .project-grid{ grid-template-columns:1fr; } }
+  .block h5{
+    font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint);
+    font-weight:600; margin-bottom:9px;
+  }
+  .block ul{ margin:0; padding-left:18px; }
+  .block li{ font-size:14.5px; color:var(--ink); margin-bottom:6px; }
+  .block li::marker{ color:var(--accent); }
+  .block li b{ font-weight:600; }
+  code.inline{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; background:var(--surface-2);
+    padding:1px 6px; border-radius:4px; color:var(--accent-strong);
+  }
+  .full-span{ grid-column:1 / -1; }
+
+  figure{ margin:22px 0 4px; }
+  figure svg{ width:100%; height:auto; display:block; background:var(--surface-2); border-radius:10px; border:1px solid var(--border); }
+  figcaption{ margin-top:9px; font-size:12.5px; color:var(--ink-faint); }
+
+  /* ---------- Education / Awards ---------- */
+  .edu-card{ background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; }
+  .edu-top{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .edu-school{ font-size:18px; font-weight:600; }
+  .edu-period{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-faint); }
+  .edu-desc{ margin-top:14px; font-size:14.5px; color:var(--ink-dim); max-width:70ch; }
+  .edu-desc b{ color:var(--ink); font-weight:600; }
+
+  .timeline{ position:relative; padding-left:26px; }
+  .timeline::before{ content:""; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--border); }
+  .t-item{ position:relative; padding-bottom:24px; }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-item::before{
+    content:""; position:absolute; left:-26px; top:4px; width:11px; height:11px; border-radius:50%;
+    background:var(--surface); border:2px solid var(--accent);
+  }
+  .t-date{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-faint); }
+  .t-title{ font-size:15px; font-weight:600; margin-top:3px; }
+  .t-desc{ font-size:13.5px; color:var(--ink-dim); margin-top:4px; max-width:66ch; }
+  .t-kind{
+    display:inline-block; margin-left:8px; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    padding:2px 8px; border-radius:999px; background:var(--accent-soft); color:var(--accent-strong); font-weight:600;
+    vertical-align:middle;
+  }
+
+  .ai-list{ display:grid; gap:12px; }
+  .ai-item{
+    display:flex; gap:12px; align-items:flex-start; background:var(--surface); border:1px solid var(--border);
+    border-radius:10px; padding:14px 16px; font-size:14.5px;
+  }
+  .ai-item .idx{ font-family:'IBM Plex Mono',monospace; color:var(--accent-strong); font-weight:600; flex-shrink:0; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding:52px 0 60px; border-top:1px solid var(--border); }
+  .footer-inner{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; align-items:flex-end; }
+  .footer-name{ font-size:20px; font-weight:600; }
+  .footer-tag{ margin-top:6px; color:var(--ink-dim); font-size:14px; }
+  .footer-links{ display:flex; gap:10px; flex-wrap:wrap; }
+  .foot-note{ margin-top:36px; font-size:12px; color:var(--ink-faint); font-family:'IBM Plex Mono',monospace; }
+
+  @media (max-width:640px){
+    .stats{ grid-template-columns:1fr; }
+    .hero{ padding-top:48px; padding-bottom:32px; }
+  }
+</style>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">유지수<span>.dev</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">소개</a></li>
+      <li><a href="#skills">스킬</a></li>
+      <li><a href="#projects">프로젝트</a></li>
+      <li><a href="#education">학력</a></li>
+      <li><a href="#awards">수상·이력</a></li>
+      <li><a href="#contact">연락처</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero wrap" id="home">
+  <div class="eyebrow">DevOps / Infra Engineer</div>
+  <h1>유지수</h1>
+  <p class="hero-role">신입 · 인프라 &amp; 보안 엔지니어</p>
+  <p class="hero-desc">
+    3개 팀 프로젝트에서 연속으로 <strong>인프라 팀장</strong>을 맡아 Terraform·Kubernetes 기반 IaC 설계부터
+    GitHub Actions·ArgoCD 기반 CI/CD 자동화, 장애 트러블슈팅까지 인프라 전 영역을 경험했습니다.
+    Burp Suite·ZAP을 활용한 모의해킹으로 실제 취약점을 발견해 직접 수정까지 이어갔으며,
+    <strong>안정적이면서도 안전한 인프라</strong>를 만드는 DevOps 엔지니어를 지향합니다.
+  </p>
+
+  <div class="contact-row">
+    <a class="pill" href="mailto:yoojisoo99@naver.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+      yoojisoo99@naver.com
+    </a>
+    <a class="pill" href="https://github.com/yoojisoo99" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+      github.com/yoojisoo99
+    </a>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>3</b><span>팀 프로젝트 인프라 리드</span></div>
+    <div class="stat"><b>2</b><span>최종·경진대회 대상 수상</span></div>
+    <div class="stat"><b>10+</b><span>운용 AWS 서비스</span></div>
+  </div>
+</header>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num mono">01 · SKILLS</div>
+      <h2 class="sec-title">기술 스택</h2>
+      <p class="sec-sub">인프라 설계부터 배포 자동화, 보안 점검까지 — 세 프로젝트에서 실제로 사용한 도구만 정리했습니다.</p>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-card">
+        <h4>Cloud &amp; IaC</h4>
+        <div class="tag-row">
+          <span class="tag">AWS</span><span class="tag">Terraform</span>
+          <span class="tag">Kubernetes</span><span class="tag">Docker</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>AWS 서비스</h4>
+        <div class="tag-row">
+          <span class="tag">VPC / EC2</span><span class="tag">EKS</span><span class="tag">RDS</span>
+          <span class="tag">ElastiCache</span><span class="tag">ALB</span><span class="tag">S3 / CloudFront</span>
+          <span class="tag">Route 53</span><span class="tag">CloudWatch / CloudTrail</span><span class="tag">SSM</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>CI / CD &amp; 협업</h4>
+        <div class="tag-row">
+          <span class="tag">GitHub Actions</span><span class="tag">Argo CD</span>
+          <span class="tag">Git / PR 리뷰</span><span class="tag">GitOps</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>보안 진단</h4>
+        <div class="tag-row">
+          <span class="tag amber">Burp Suite</span><span class="tag amber">ZAP</span>
+          <span class="tag amber">모의해킹</span><span class="tag amber">취약점 분석</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num mono">02 · PROJECTS</div>
+      <h2 class="sec-title">프로젝트</h2>
+      <p class="sec-sub">SK쉴더스 루키즈 5기에서 진행한 세 팀 프로젝트 모두에서 인프라를 단독 또는 팀장으로 리드했습니다.</p>
+    </div>
+
+    <!-- Project 1 -->
+    <article class="project">
+      <div class="project-top">
+        <div>
+          <h3 class="project-title">가상계좌 결제 시스템 인프라 설계 및 구축</h3>
+          <div class="project-meta">
+            <span>2026.05 · 8일</span><span>·</span><span>5인 팀 미니프로젝트</span><span>·</span><span>인프라 단독 담당</span>
+          </div>
+        </div>
+        <span class="badge role">인프라 단독</span>
+      </div>
+
+      <div class="project-grid">
+        <div class="block">
+          <h5>설계 &amp; 구축</h5>
+          <ul>
+            <li><b>3-Tier 망분리</b> — Public / Private-WAS / Database Subnet 구조 설계</li>
+            <li>Terraform으로 VPC·EKS·RDS·ElastiCache 등 전체 인프라 코드화</li>
+            <li>인프라 프로비저닝부터 배포까지 전 과정 코드 기반 자동화</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h5>CI / CD</h5>
+          <ul>
+            <li>GitHub Actions ↔ ArgoCD 연동으로 GitOps 파이프라인 구축</li>
+            <li>PR 시점 <code class="inline">terraform plan</code> 미리보기 구성</li>
+            <li><code class="inline">main</code> 브랜치 merge 시 자동 apply 구성</li>
+            <li>Git 변경사항 실시간 동기화 파이프라인 구축</li>
+          </ul>
+        </div>
+        <div class="block full-span">
+          <h5>트러블슈팅</h5>
+          <ul>
+            <li>보안 그룹 미스매치로 인한 <b>파드 장애</b> 원인 분석 및 해결</li>
+            <li>ALB-Ingress <b>포트 불일치</b>로 인한 502 / 404 오류 원인 분석 및 해결</li>
+            <li>ALB Idle Timeout으로 인한 <b>SSE 연결 끊김</b> 원인 분석 및 해결</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 2: Onde -->
+    <article class="project">
+      <div class="project-top">
+        <div>
+          <h3 class="project-title">Onde — 여행 예약 플랫폼 인프라 및 보안 점검</h3>
+          <div class="project-meta">
+            <span>2026.05 – 2026.07</span><span>·</span><span>7인 팀 (팀명: 너의 취약점은)</span><span>·</span><span>2인 인프라팀 팀장</span>
+          </div>
+        </div>
+        <span class="badge gold">SK쉴더스 루키즈 5기 최종프로젝트 대상</span>
+      </div>
+
+      <div class="project-grid">
+        <div class="block">
+          <h5>아키텍처</h5>
+          <ul>
+            <li>Multi-AZ VPC(<code class="inline">10.0.0.0/16</code>) — Public / Private / DB Subnet 3계층 분리</li>
+            <li>Frontend·Backend·Admin(Windows) EC2를 Private Subnet에 격리 배치</li>
+            <li>RDS MariaDB · ElastiCache Redis는 DB Subnet에 인터넷 접근 차단 격리</li>
+            <li>SSH 22 포트 미개방 — <b>SSM Session Manager</b> 전용 키리스 접속 체계</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h5>배포 &amp; IaC 운영</h5>
+          <ul>
+            <li>GitHub Actions <code class="inline">repository_dispatch</code> 기반 배포, SSM으로 EC2 컨테이너 원격 교체</li>
+            <li>ALB 80→443 리다이렉트, ACM 와일드카드 인증서, Route 53 도메인별 라우팅</li>
+            <li>Terraform Remote State — S3 + DynamoDB Lock으로 상태 동기화 &amp; 락 제어</li>
+            <li>팀원 작성 Multi-AZ Terraform 코드 리뷰 후 apply 실행</li>
+            <li>Flyway <code class="inline">baselineOnMigrate</code> 옵션으로 DB 마이그레이션 안정화</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h5>아키텍처 의사결정 &amp; 비용</h5>
+          <ul>
+            <li>비용 효율성·운영 편의성을 고려해 <b>EKS 대신 EC2 기반 아키텍처</b>로 방향 결정</li>
+            <li>부하 테스트 결과를 바탕으로 불필요한 <code class="inline">backend-2</code> 인스턴스 정리</li>
+            <li>관리자 페이지 도메인(<code class="inline">rookies.onde.click</code>) 독립 분리</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h5>보안 점검 &amp; 트러블슈팅</h5>
+          <ul>
+            <li>Burp Suite·ZAP 모의해킹으로 <b>role 파라미터 조작 → SUPER_ADMIN 권한 상승</b> 취약점 발견</li>
+            <li><b>totalPrice 파라미터 조작 → 1원 결제</b> 취약점 발견, 이행점검 후 직접 수정 조치</li>
+            <li>EC2 디스크 용량 문제, BCrypt 해시 버전 불일치로 인한 로컬 개발 접근 오류 진단·해결</li>
+          </ul>
+        </div>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 820 520" role="img" aria-label="Onde 서비스의 3계층 AWS 인프라 구조도: Route 53가 ALB로 트래픽을 전달하고, ALB는 Public Subnet에서 Private Subnet의 Frontend, Backend, Admin EC2로 경로별 라우팅하며, Backend EC2는 DB Subnet의 RDS와 Redis에 접근한다.">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+          <g fill="none" stroke="currentColor" opacity="0.85" font-family="IBM Plex Mono, monospace">
+
+            <!-- Route53 -->
+            <rect x="310" y="26" width="200" height="46" rx="8" stroke-width="1.5"/>
+            <text x="410" y="54" text-anchor="middle" font-size="13" fill="currentColor" stroke="none">Route 53 (도메인 라우팅)</text>
+
+            <line x1="410" y1="72" x2="410" y2="118" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <text x="420" y="98" font-size="11" fill="currentColor" stroke="none">HTTPS</text>
+
+            <!-- Public subnet -->
+            <rect x="40" y="118" width="740" height="96" rx="10" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+            <text x="56" y="136" font-size="11.5" fill="currentColor" stroke="none" opacity="0.7">PUBLIC SUBNET</text>
+
+            <rect x="300" y="150" width="220" height="48" rx="8" stroke-width="1.5"/>
+            <text x="410" y="179" text-anchor="middle" font-size="13" fill="currentColor" stroke="none">ALB (80 → 443 Redirect)</text>
+
+            <rect x="580" y="150" width="160" height="48" rx="8" stroke-width="1.5" opacity="0.8"/>
+            <text x="660" y="179" text-anchor="middle" font-size="12.5" fill="currentColor" stroke="none">NAT Gateway</text>
+
+            <!-- arrows down to private -->
+            <line x1="330" y1="198" x2="150" y2="256" stroke-width="1.3" marker-end="url(#arrow)"/>
+            <line x1="410" y1="198" x2="410" y2="256" stroke-width="1.3" marker-end="url(#arrow)"/>
+            <line x1="490" y1="198" x2="650" y2="256" stroke-width="1.3" marker-end="url(#arrow)"/>
+
+            <text x="272" y="215" font-size="10.5" fill="currentColor" stroke="none" text-anchor="end">/ (정적)</text>
+            <text x="410" y="217" font-size="10.5" fill="currentColor" stroke="none" text-anchor="middle">/api/*, /oauth2/*</text>
+            <text x="536" y="215" font-size="10.5" fill="currentColor" stroke="none" text-anchor="start">rookies.*/admin/*</text>
+
+            <!-- Private subnet -->
+            <rect x="40" y="256" width="740" height="100" rx="10" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+            <text x="56" y="274" font-size="11.5" fill="currentColor" stroke="none" opacity="0.7">PRIVATE SUBNET · SSH 미개방, SSM 전용 접속</text>
+
+            <rect x="60" y="290" width="180" height="50" rx="8" stroke-width="1.5"/>
+            <text x="150" y="311" text-anchor="middle" font-size="12" fill="currentColor" stroke="none">Frontend EC2</text>
+            <text x="150" y="327" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity="0.75">Nginx + React SPA</text>
+
+            <rect x="320" y="290" width="180" height="50" rx="8" stroke-width="1.5"/>
+            <text x="410" y="311" text-anchor="middle" font-size="12" fill="currentColor" stroke="none">Backend EC2</text>
+            <text x="410" y="327" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity="0.75">Spring Boot API</text>
+
+            <rect x="560" y="290" width="200" height="50" rx="8" stroke-width="1.5"/>
+            <text x="660" y="311" text-anchor="middle" font-size="12" fill="currentColor" stroke="none">Admin EC2 (Windows)</text>
+            <text x="660" y="327" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity="0.75">Spring Boot Admin</text>
+
+            <!-- arrows to db -->
+            <line x1="390" y1="340" x2="330" y2="404" stroke-width="1.3" marker-end="url(#arrow)"/>
+            <line x1="430" y1="340" x2="530" y2="404" stroke-width="1.3" marker-end="url(#arrow)"/>
+            <text x="300" y="378" font-size="10.5" fill="currentColor" stroke="none">3306</text>
+            <text x="500" y="378" font-size="10.5" fill="currentColor" stroke="none">6379</text>
+
+            <!-- DB subnet -->
+            <rect x="180" y="404" width="460" height="96" rx="10" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+            <text x="196" y="422" font-size="11.5" fill="currentColor" stroke="none" opacity="0.7">DB SUBNET · 인터넷 접근 차단</text>
+
+            <rect x="210" y="436" width="200" height="50" rx="8" stroke-width="1.5"/>
+            <text x="310" y="457" text-anchor="middle" font-size="12" fill="currentColor" stroke="none">RDS MariaDB</text>
+            <text x="310" y="473" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity="0.75">암호화 · 7일 백업</text>
+
+            <rect x="440" y="436" width="180" height="50" rx="8" stroke-width="1.5"/>
+            <text x="530" y="457" text-anchor="middle" font-size="12" fill="currentColor" stroke="none">ElastiCache Redis</text>
+            <text x="530" y="473" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity="0.75">세션 · 캐싱</text>
+          </g>
+        </svg>
+        <figcaption>Onde 인프라 구조 — Route 53에서 ALB를 거쳐 Public / Private / DB 3개 서브넷으로 분리된 트래픽 경로. Terraform으로 전체 코드화하고, 관리자 도메인만 별도 라우팅 규칙으로 분리했습니다.</figcaption>
+      </figure>
+    </article>
+
+    <!-- Project 3: Argos -->
+    <article class="project">
+      <div class="project-top">
+        <div>
+          <h3 class="project-title">Argos — 웹 취약점 자동 진단 플랫폼</h3>
+          <div class="project-meta">
+            <span>2026.07</span><span>·</span><span>7인 팀 (팀명: 너의 취약점은)</span><span>·</span><span>인프라 팀장</span>
+          </div>
+        </div>
+        <span class="badge gold">SK쉴더스 루키즈 5기 최종프로젝트 대상</span>
+      </div>
+
+      <p style="margin-top:16px; font-size:14.5px; color:var(--ink-dim); max-width:70ch;">
+        URL/IP를 스캔해 <b>KISA/SK 보안 가이드라인</b> 기준의 컴플라이언스 진단 보고서를 자동 생성하는 SaaS.
+        인프라 작업을 6개 모듈(네트워킹 / 프론트엔드·백엔드 컴퓨팅 / 스토리지 / CI / CD)로 나눠 팀원을 배정하고
+        PR 리뷰와 코드 통합을 담당했습니다.
+      </p>
+
+      <div class="project-grid" style="margin-top:20px;">
+        <div class="block">
+          <h5>인프라 개선</h5>
+          <ul>
+            <li>최신 AMI 조회 방식이 AWS 패치 AMI 릴리스 시 인스턴스를 재생성해 <b>다운타임</b>을 유발하던 문제 확인</li>
+            <li><code class="inline">lifecycle { ignore_changes = [ami] }</code> 설정으로 해결</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h5>배포 보안 개선</h5>
+          <ul>
+            <li>GitHub Actions Repository Variables에 <b>평문 노출</b>된 인스턴스 ID, ECR 레지스트리 주소, 서비스 도메인 등 4개 설정값 확인</li>
+            <li>해당 설정값을 전부 Secrets로 전환</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num mono">03 · EDUCATION</div>
+      <h2 class="sec-title">학력</h2>
+    </div>
+    <div class="edu-card">
+      <div class="edu-top">
+        <div class="edu-school">경기대학교 · 컴퓨터공학전공</div>
+        <div class="edu-period mono">2022.03 – 2026.02 졸업</div>
+      </div>
+      <p class="edu-desc">
+        정보보안 연구실에서 <b>블록체인 보안</b>을 주제로 연구 활동을 진행했습니다.
+        Ethereum/Solidity 기반 스마트 컨트랙트를 개발하고, IPFS를 활용한 인증서 발급 시스템과
+        MetaMask 지갑 연동 기능을 구현했으며, C2PA 표준 기반의 중고거래 플랫폼을 연구했습니다.
+        캡스톤 디자인 프로젝트에서는 Unity 3D 게임 "어린왕자"로 대상, 지도 기반 재활용 분리배출 리뷰 앱으로
+        은상을 수상했습니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AWARDS / TIMELINE ================= -->
+<section id="awards">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num mono">04 · AWARDS &amp; CERTS</div>
+      <h2 class="sec-title">수상 · 교육 이력</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-date">2024.06</div>
+        <div class="t-title">기초캡스톤디자인 경진대회 대상<span class="t-kind">수상</span></div>
+        <div class="t-desc">6인 팀 EIIS · Unity 3D 게임 "어린왕자" 개발 · 경기대학교 소프트웨어중심대학사업단 주최</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2024.08</div>
+        <div class="t-title">Uppsala Security Blockchain, Web3 and AI Bootcamp 수료<span class="t-kind">교육</span></div>
+        <div class="t-desc">싱가포르 소재 블록체인 보안 기업 Uppsala Security 주관 부트캠프 — 블록체인 · Web3 · AI 교육과정</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2024.11</div>
+        <div class="t-title">K-Software Empowerment BootCamp 수료<span class="t-kind">교육</span></div>
+        <div class="t-desc">정보통신기획평가원(IITP) 주관 · 성균관대·경기대·인하대 협력 SW아카데미 사업</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2025.07</div>
+        <div class="t-title">심화캡스톤디자인 경진대회 은상<span class="t-kind">수상</span></div>
+        <div class="t-desc">5인 팀 "용기있는 사람들" · 지도 기반 재활용 분리배출 리뷰 앱 개발 · 경기대학교 소프트웨어중심대학사업단 주최</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026.07</div>
+        <div class="t-title">SK쉴더스 루키즈 5기(지능형 애플리케이션 개발자 양성과정) 수료<span class="t-kind">교육</span></div>
+        <div class="t-desc">SK쉴더스 인포섹 아카데미 · K-Digital 첨단산업 디지털 핵심 실무인재 양성훈련 · 120일(960시간)</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026.07</div>
+        <div class="t-title">SK쉴더스 루키즈 5기 최종프로젝트 대상<span class="t-kind">수상</span></div>
+        <div class="t-desc">7인 팀 "너의 취약점은" · 바이브코딩 기반 진단 대상 플랫폼 및 WEB/API 취약점 자동 진단 플랫폼 개발 · 인프라 팀장으로서 6개 모듈 Terraform 통합 및 PR 리뷰 담당</div>
+      </div>
+    </div>
+
+    <div class="skill-groups" style="margin-top:32px;">
+      <div class="skill-card">
+        <h4>언어</h4>
+        <div class="tag-row"><span class="tag">영어 · 일상 회화</span><span class="tag">OPIc IL (2024.06.29)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AI 활용 경험 ================= -->
+<section id="ai-usage">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num mono">05 · AI 활용 경험</div>
+      <h2 class="sec-title">AI를 대하는 방식</h2>
+    </div>
+    <div class="ai-list">
+      <div class="ai-item"><span class="idx mono">01</span><span>개발 전 과정에서 AI를 페어프로그래머로 활용해 코드 작성·리뷰 효율화</span></div>
+      <div class="ai-item"><span class="idx mono">02</span><span>배포 서버 장애 발생 시 AI에게 AWS CLI로 직접 원인을 진단시켜 트러블슈팅</span></div>
+      <div class="ai-item"><span class="idx mono">03</span><span>DB seed AWS 업로드 자동화 스크립트 작성부터 실제 업로드 실행까지 AI에게 위임</span></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-name">유지수</div>
+        <div class="footer-tag">안정적이면서도 안전한 인프라를 만드는 DevOps 엔지니어를 지향합니다.</div>
+      </div>
+      <div class="footer-links">
+        <a class="pill" href="mailto:yoojisoo99@naver.com">yoojisoo99@naver.com</a>
+        <a class="pill" href="https://github.com/yoojisoo99" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="foot-note">Last updated 2026.09</div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var links = Array.from(document.querySelectorAll('#navLinks a'));
+    var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+    if(!('IntersectionObserver' in window)) return;
+    var map = new Map();
+    sections.forEach(function(sec, i){ map.set(sec, links[i]); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var link = map.get(entry.target);
+        if(!link) return;
+        if(entry.isIntersecting){
+          links.forEach(function(l){ l.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function(sec){ io.observe(sec); });
+  })();
+</script>
+</body>
+</html>
